@@ -4,9 +4,10 @@ const chainData = require("./Chains.json");
 const {ethers} = require("ethers");
 const https = require('https');
 const hubAbi = require('./hubAbi.json');
+const tokenAbi = require('./tokenAbi.json');
 const httpsAgent = new https.Agent({keepAlive: true});
 
-exports.transfer = async(serviceNodeUrl, serviceNodeAddress, quantity, decimals, sourceChainId, sourceAddress,
+exports.transfer = async(serviceNodeUrl, serviceNodeAddress, quantity, sourceChainId, sourceAddress,
                               sourceTokenAddress, destinationTokenAddress, destinationChainId, destinationAddress,
                               privateKey) => {
 
@@ -18,13 +19,14 @@ exports.transfer = async(serviceNodeUrl, serviceNodeAddress, quantity, decimals,
     });
 
     const web3 = new Web3(new Web3.providers.HttpProvider(chainData.chains[sourceChainId].url));
-    const contract = new web3.eth.Contract(hubAbi.abi, chainData.chains[sourceChainId].hub);
-    const forwarder = await contract.methods.getPantosForwarder().call();
-    const pantos = await contract.methods.getPantosToken().call();
-
+    const hubContract = new web3.eth.Contract(hubAbi.abi, chainData.chains[sourceChainId].hub);
+    const tokenContract = new web3.eth.Contract(tokenAbi.abi, sourceTokenAddress);
+    const forwarder = await hubContract.methods.getPantosForwarder().call();
+    const pantos = await hubContract.methods.getPantosToken().call();
+    const decimals = await tokenContract.methods.decimals().call();
     if(response.data && Array.isArray(response.data) && response.data.length > 0) {
         const bid = response.data[0];
-        const transferQuantity = (quantity * Math.pow(10, decimals)).toString(10);
+        const transferQuantity = (quantity * Math.pow(10, Number(decimals))).toString(10);
 
         const parsedFee = bid.fee;
 

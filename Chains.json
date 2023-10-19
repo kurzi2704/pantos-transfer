@@ -1,0 +1,32 @@
+{
+  "chains":{
+    "0": {
+      "hub": "0x89C8B8458A1ac9E07096770D2261634a3f13d781",
+      "url": "https://rpc.ankr.com/eth_goerli"
+    },
+    "1": {
+      "hub": "0xFB37499DC5401Dc39a0734df1fC7924d769721d5",
+      "url": "https://rpc.ankr.com/bsc_testnet_chapel"
+    },
+    "3": {
+      "hub": "0xbafFb84601BeC1FCb4B842f8917E3eA850781BE7",
+      "url": "https://api.avax-test.network/ext/bc/C/rpc"
+    },
+    "5": {
+      "hub": "0x5C4B92cd0A956dedc14AF31fD474931540D8277B",
+      "url": "https://rpc.ankr.com/polygon_mumbai"
+    },
+    "6": {
+      "hub": "0x0cfb3c7c11a33bef124a9d86073e73932b9abf90",
+      "url": "https://evm-t3.cronos.org"
+    },
+    "7": {
+      "hub": "0x4BC6A71D4C3D6170d0Db849fE19b8DbA18f1a7F5",
+      "url": "https://rpc.ankr.com/fantom_testnet"
+    },
+    "8": {
+      "hub": "0x8389B9A7608dbf52a699b998f309883257923C0E",
+      "url": "https://alfajores-forno.celo-testnet.org"
+    }
+  }
+}
